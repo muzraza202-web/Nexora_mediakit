@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media Kit — @thecatvoice</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f5f0e8;
+    --gold: #c9a84c;
+    --gold-light: #e8d49a;
+    --muted: #6b6456;
+    --red: #8b1a1a;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 40px;
+    text-align: center;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 100%, rgba(201,168,76,0.18) 0%, transparent 70%),
+      repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(201,168,76,0.04) 60px, rgba(201,168,76,0.04) 61px),
+      repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(201,168,76,0.04) 60px, rgba(201,168,76,0.04) 61px);
+  }
+
+  .cover-border {
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba(201,168,76,0.3);
+    pointer-events: none;
+  }
+  .cover-border::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .corner {
+    position: absolute;
+    width: 24px; height: 24px;
+    border-color: var(--gold);
+    border-style: solid;
+  }
+  .corner.tl { top: 20px; left: 20px; border-width: 2px 0 0 2px; }
+  .corner.tr { top: 20px; right: 20px; border-width: 2px 2px 0 0; }
+  .corner.bl { bottom: 20px; left: 20px; border-width: 0 0 2px 2px; }
+  .corner.br { bottom: 20px; right: 20px; border-width: 0 2px 2px 0; }
+
+  .cover-eyebrow {
+    position: relative;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+  }
+
+  .cover-avatar {
+    position: relative;
+    width: 140px; height: 140px;
+    margin: 0 auto 32px;
+  }
+  .cover-avatar-ring {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    opacity: 0.6;
+  }
+  .cover-avatar-ring2 {
+    position: absolute;
+    inset: -16px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.25);
+  }
+  .avatar-placeholder {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2a2218 0%, #1a1410 100%);
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+  }
+
+  .cover-name {
+    position: relative;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 8vw, 72px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .cover-name span { color: var(--gold); }
+
+  .cover-handle {
+    position: relative;
+    font-size: 15px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.08em;
+    margin-bottom: 40px;
+  }
+
+  .cover-divider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 400px;
+  }
+  .cover-divider::before, .cover-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .cover-divider-icon { color: var(--gold); font-size: 18px; }
+
+  .cover-tagline {
+    position: relative;
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    max-width: 380px;
+    line-height: 1.7;
+    margin-bottom: 50px;
+  }
+
+  .cover-stats {
+    position: relative;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .cover-stat { text-align: center; }
+  .cover-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .cover-stat-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-top: 4px;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  .section + .section {
+    border-top: 1px solid rgba(13,13,13,0.1);
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 32px;
+    color: var(--ink);
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--red);
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  @media (max-width: 620px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .cover-stats { gap: 24px; }
+  }
+
+  .about-text {
+    font-size: 15px;
+    line-height: 1.85;
+    color: #3a3228;
+  }
+
+  .about-text p + p { margin-top: 16px; }
+
+  .niche-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .niche-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: var(--ink);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  .niche-item::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  /* ── STATS ── */
+  .stats-dark {
+    background: var(--ink);
+    padding: 80px 40px;
+  }
+
+  .stats-dark .section-label { color: var(--gold); }
+  .stats-dark .section-title { color: #fff; }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2px;
+    background: rgba(201,168,76,0.15);
+  }
+
+  .stat-card {
+    background: var(--ink);
+    padding: 36px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+  .stat-card:hover::after { transform: scaleX(1); }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-desc {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* ── AUDIENCE ── */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  @media (max-width: 560px) {
+    .audience-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .audience-card {
+    border: 1px solid rgba(13,13,13,0.12);
+    padding: 28px;
+  }
+
+  .audience-card-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .bar-item {
+    margin-bottom: 14px;
+  }
+
+  .bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .bar-label span:last-child { color: var(--gold); font-weight: 500; }
+
+  .bar-track {
+    height: 4px;
+    background: rgba(13,13,13,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--red), var(--gold));
+    border-radius: 2px;
+  }
+
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .tag {
+    padding: 6px 14px;
+    border: 1px solid rgba(13,13,13,0.15);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .tag.active {
+    background: var(--ink);
+    color: var(--gold);
+    border-color: var(--ink);
+  }
+
+  /* ── CONTENT ── */
+  .content-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2px;
+    background: rgba(13,13,13,0.08);
+    margin-top: 8px;
+  }
+
+  .content-type {
+    background: var(--paper);
+    padding: 28px 24px;
+  }
+
+  .content-type-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .content-type-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .content-type-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── PACKAGES ── */
+  .packages-dark {
+    background: #100e0a;
+    padding: 80px 40px;
+  }
+  .packages-dark .section-label { color: var(--gold); }
+  .packages-dark .section-title { color: #fff; }
+
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2px;
+    background: rgba(201,168,76,0.12);
+  }
+
+  .package {
+    background: #100e0a;
+    padding: 36px 28px;
+    position: relative;
+  }
+
+  .package.featured {
+    background: #1a150c;
+  }
+
+  .package-badge {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--gold);
+    padding: 4px 10px;
+    margin-bottom: 20px;
+  }
+
+  .package-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .package-price {
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .package-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .package-items li {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .package-items li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 10px;
+    top: 2px;
+  }
+
+  /* ── BRANDS ── */
+  .ideal-brands {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .brand-cat {
+    padding: 24px 20px;
+    border-left: 3px solid var(--gold);
+    background: rgba(201,168,76,0.05);
+  }
+
+  .brand-cat-name {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .brand-cat-examples {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--ink);
+    padding: 80px 40px;
+    text-align: center;
+  }
+
+  .contact-section .section-label { color: var(--gold); }
+
+  .contact-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 6vw, 56px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .contact-title em { color: var(--gold); font-style: italic; }
+
+  .contact-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .contact-icon {
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .footer-note {
+    margin-top: 60px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+  }
+
+  .divider-line {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 20px auto;
+    max-width: 300px;
+  }
+  .divider-line::before, .divider-line::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,168,76,0.3);
+  }
+  .divider-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-border"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <p class="cover-eyebrow">✦ Media Kit 2025 ✦</p>
+
+  <div class="cover-avatar">
+    <div class="cover-avatar-ring"></div>
+    <div class="cover-avatar-ring2"></div>
+    <div class="avatar-placeholder">🐱</div>
+  </div>
+
+  <h1 class="cover-name">The <span>Cat</span> Voice</h1>
+  <p class="cover-handle">@thecatvoice &nbsp;·&nbsp; Instagram</p>
+
+  <div class="cover-divider"><span class="cover-divider-icon">✦</span></div>
+
+  <p class="cover-tagline">Pakistan's educational storyteller — unraveling history, mystery & global affairs through compelling content.</p>
+
+  <div class="cover-stats">
+    <div class="cover-stat">
+      <div class="cover-stat-num">44K</div>
+      <div class="cover-stat-label">Followers</div>
+    </div>
+    <div class="cover-stat">
+      <div class="cover-stat-num">5–8%</div>
+      <div class="cover-stat-label">Avg. Engagement</div>
+    </div>
+    <div class="cover-stat">
+      <div class="cover-stat-num">🇵🇰</div>
+      <div class="cover-stat-label">Pakistan</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="section">
+  <p class="section-label">✦ About the Creator</p>
+  <h2 class="section-title">Voices that make you <em>think.</em></h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>The Cat Voice is a Pakistani educational content creator with a unique ability to make complex topics — from ancient history to modern geopolitics — feel captivating and accessible.</p>
+      <p>With 44,000 engaged followers, the audience trusts this voice for content that is researched, thought-provoking, and authentically Pakistani in perspective.</p>
+      <p>Whether it's the mysteries of ancient civilizations or the latest developments in Israel–Iran tensions, The Cat Voice delivers content that sparks conversation.</p>
+    </div>
+    <ul class="niche-list">
+      <li class="niche-item">📜 History & Ancient Civilizations</li>
+      <li class="niche-item">🔍 Mystery & Unexplained Events</li>
+      <li class="niche-item">🌍 Geopolitics & World Affairs</li>
+      <li class="niche-item">⚔️ War, Conflict & Diplomacy</li>
+      <li class="niche-item">🇵🇰 Pakistani Perspective</li>
+    </ul>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-dark">
+  <div class="section" style="padding-top:0;padding-bottom:0;border:none;">
+    <p class="section-label">✦ Platform Statistics</p>
+    <h2 class="section-title" style="color:#fff;">Numbers that <em style="color:var(--gold)">matter.</em></h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">44K</div>
+        <div class="stat-desc">Total Followers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">5–8%</div>
+        <div class="stat-desc">Engagement Rate</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3–5×</div>
+        <div class="stat-desc">Micro-Influencer Boost</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">PKR</div>
+        <div class="stat-desc">Local Currency Audience</div>
+      </div>
+    </div>
+    <p style="color:rgba(255,255,255,0.3);font-size:11px;margin-top:16px;letter-spacing:0.05em;">
+      * Micro-influencers (10K–100K) consistently outperform mega accounts in trust & conversion.
+    </p>
+  </div>
+</div>
+
+<!-- AUDIENCE -->
+<div class="section">
+  <p class="section-label">✦ Audience Insights</p>
+  <h2 class="section-title">Who is <em>listening?</em></h2>
+  <div class="audience-grid">
+    <div class="audience-card">
+      <p class="audience-card-title">Age Breakdown</p>
+      <div class="bar-item">
+        <div class="bar-label"><span>18–24 yrs</span><span>38%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:38%"></div></div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label"><span>25–34 yrs</span><span>34%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:34%"></div></div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label"><span>35–44 yrs</span><span>18%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:18%"></div></div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label"><span>45+ yrs</span><span>10%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:10%"></div></div>
+      </div>
+    </div>
+    <div class="audience-card">
+      <p class="audience-card-title">Top Interests</p>
+      <div class="tag-cloud">
+        <span class="tag active">History</span>
+        <span class="tag active">Geopolitics</span>
+        <span class="tag active">Education</span>
+        <span class="tag">Books</span>
+        <span class="tag">News</span>
+        <span class="tag">Technology</span>
+        <span class="tag">Pakistan</span>
+        <span class="tag">Mystery</span>
+        <span class="tag">Current Affairs</span>
+        <span class="tag">Science</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT TYPES -->
+<div class="section" style="padding-top:0;">
+  <p class="section-label">✦ Content Formats</p>
+  <h2 class="section-title">What we <em>create.</em></h2>
+  <div class="content-types">
+    <div class="content-type">
+      <div class="content-type-icon">🎬</div>
+      <div class="content-type-name">Reels</div>
+      <div class="content-type-desc">Short-form educational storytelling — hook, explain, impact.</div>
+    </div>
+    <div class="content-type">
+      <div class="content-type-icon">📸</div>
+      <div class="content-type-name">Carousels</div>
+      <div class="content-type-desc">In-depth visual breakdowns of historical events & topics.</div>
+    </div>
+    <div class="content-type">
+      <div class="content-type-icon">📝</div>
+      <div class="content-type-name">Stories</div>
+      <div class="content-type-desc">Daily engagement, polls, Q&A and brand placement.</div>
+    </div>
+    <div class="content-type">
+      <div class="content-type-icon">🎙️</div>
+      <div class="content-type-name">Voiceover</div>
+      <div class="content-type-desc">Signature narration style that builds trust and recall.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PACKAGES -->
+<div class="packages-dark">
+  <div class="section" style="padding-top:0;padding-bottom:0;border:none;">
+    <p class="section-label">✦ Collaboration Packages</p>
+    <h2 class="section-title" style="color:#fff;">Let's work <em style="color:var(--gold)">together.</em></h2>
+    <div class="packages-grid">
+      <div class="package">
+        <p class="package-name">Basic</p>
+        <p class="package-price">PKR 15,000 – 25,000</p>
+        <ul class="package-items">
+          <li>1 × Story mention</li>
+          <li>Brand tag in caption</li>
+          <li>48-hr story placement</li>
+          <li>Basic performance report</li>
+        </ul>
+      </div>
+      <div class="package featured">
+        <span class="package-badge">Most Popular</span>
+        <p class="package-name">Standard</p>
+        <p class="package-price">PKR 30,000 – 50,000</p>
+        <ul class="package-items">
+          <li>1 × Dedicated Reel</li>
+          <li>2 × Story frames</li>
+          <li>Brand integrated in content</li>
+          <li>Caption + link in bio</li>
+          <li>Engagement report</li>
+        </ul>
+      </div>
+      <div class="package">
+        <p class="package-name">Premium</p>
+        <p class="package-price">PKR 60,000 – 100,000</p>
+        <ul class="package-items">
+          <li>1 × Reel + 1 × Carousel</li>
+          <li>3 × Story frames</li>
+          <li>Full brand narrative integration</li>
+          <li>Swipe-up / link</li>
+          <li>30-day detailed analytics</li>
+          <li>Dedicated campaign hashtag</li>
+        </ul>
+      </div>
+    </div>
+    <p style="color:rgba(255,255,255,0.3);font-size:11px;margin-top:16px;letter-spacing:0.05em;">
+      Custom packages available. All prices negotiable based on campaign scope.
+    </p>
+  </div>
+</div>
+
+<!-- IDEAL BRANDS -->
+<div class="section">
+  <p class="section-label">✦ Brand Fit</p>
+  <h2 class="section-title">Ideal <em>partners.</em></h2>
+  <div class="ideal-brands">
+    <div class="brand-cat">
+      <p class="brand-cat-name">📚 Education</p>
+      <p class="brand-cat-examples">Online courses, e-learning platforms, book publishers, tutoring apps</p>
+    </div>
+    <div class="brand-cat">
+      <p class="brand-cat-name">💻 Tech</p>
+      <p class="brand-cat-examples">Mobile apps, VPNs, productivity tools, gadgets</p>
+    </div>
+    <div class="brand-cat">
+      <p class="brand-cat-name">🛒 E-Commerce</p>
+      <p class="brand-cat-examples">Daraz.pk, lifestyle products, subscription boxes</p>
+    </div>
+    <div class="brand-cat">
+      <p class="brand-cat-name">☕ Lifestyle</p>
+      <p class="brand-cat-examples">Beverages, stationary, wellness, home products</p>
+    </div>
+    <div class="brand-cat">
+      <p class="brand-cat-name">📰 Media</p>
+      <p class="brand-cat-examples">News apps, podcast platforms, documentary channels</p>
+    </div>
+    <div class="brand-cat">
+      <p class="brand-cat-name">🏦 Finance</p>
+      <p class="brand-cat-examples">Fintech apps, digital wallets, investment platforms</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-section">
+  <p class="section-label" style="text-align:center;">✦ Get In Touch</p>
+  <h2 class="contact-title">Ready to <em>collaborate?</em></h2>
+  <p class="contact-sub">Reach out to discuss a custom campaign for your brand.</p>
+
+  <div class="divider-line"><div class="divider-dot"></div></div>
+
+  <div class="contact-info">
+    <div class="contact-row">
+      <div class="contact-icon">📸</div>
+      <span>@thecatvoice on Instagram</span>
+    </div>
+    <div class="contact-row">
+      <div class="contact-icon">📍</div>
+      <span>Pakistan</span>
+    </div>
+    <div class="contact-row">
+      <div class="contact-icon">📧</div>
+      <span>[Your Agency Email Here]</span>
+    </div>
+  </div>
+
+  <p class="footer-note">© 2025 The Cat Voice · All Rights Reserved · Represented by [Your Agency Name]</p>
+</div>
+
+</body>
+</html>
